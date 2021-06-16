@@ -23,11 +23,11 @@ If there is no internet connection a snackbar will be displayed on screen notify
 
 This API retrieves a list of characters that are displayed in the application, retrofit has been chosen as the library in charge of performing the remote calls to the endpoints and do the job. In order to retrieve data from those endpoints, it is necessary to first create an account on the marvel website, right after that, it will be necessary to obtain both, a public key and a private key.
 
-Once with the keys, it will be necessary to form a hash with the md5 conversion of the result of joining a timestamp, the private key and the public key we previously obtained. Right after getting the hash, we will need to send the timestamp, the public key and the hash as parameters of every endpoint in order to authenticate ourselves and obtain access
+Once with the keys, it will be necessary to form a hash with the md5 conversion of the result of joining a timestamp, the private key and the public key we previously obtained. Right after getting the hash, we will need to send the timestamp, the public key and the hash as parameters of every endpoint in order to authenticate ourselves and obtain access.
 
 ## Architecture
 
-The application was developed following clean architecture practices in order to create a testable, scalable and easy to work on solution. It is divided in 4 diferent layers, these are:
+The application was developed following clean architecture practices in order to create a testable, scalable and easy to work on solution. It is divided in 5 diferent layers, these are:
 
 ### App / Presenter
 
@@ -78,9 +78,57 @@ The memory of the application is a sole class that keeps the instances alive of 
 The remote package of the datasources layer implements the data layer repository interface and performs calls to the retrofit service that contains the marvel API endpoints.
 Once a call has been performed, the service function that calls to the endpoint at hand returns a response object, there at the datasources implemented method from the data layer repository interface, we use a custom mapper to transform the response object into a list of models of type Character, this list will be wrapped into a single observable that will be finally returned all the way down to the app / presenter layer.
 
+### Model
+
+This layer contains all the entity models used throughout the layers.
+
 ## Dependency injection
 
 In order to have at our disposal all the required objects instanciated and available, it is necessary to inject them in Koin.
 Koin is the dependency injector that has been used in this test for this clean architecture to work.
 The location of the koin modules can be found within the app / presenter layer, at the common/di/AppModules.kt file.
 The setup of koin can be found at the OpenbankMobileTestApplication application class referenced from the AndroidManifest.xml
+
+## Error handling
+
+Every viewmodel has an error builder attached to process the response errors that are obtained, some of them come from the API, others don't.
+In any case, all errors coming from the API are mapped and just like any other error, form an error bundle on the error builder.
+There is an AppAction enumeration for every use case in the app, and an AppError for every possible error, those are:
+
+Unknown (-1)
+General error (1)
+No internet (2)
+Timeout (3)
+No route to host (4)
+Unauthorized (401)
+Forbidden (403)
+Not found (404)
+Not allowed (405)
+Conflict (409)
+
+Error bundles contain the error detail, the error support code and the AppAction indicating the use case they are related to in order to ease possible future error debugging.
+
+## Testing
+
+Testing is implemented on each and any of the architecture's layers for one of the two endpoints, the one that retrieves the list of characters.
+The code flow is tested straight from the fragment all the way up to the datasources layer.
+
+### App / Presenter
+
+Tests on the presenter layer are instrumented tests, as they require a device either physical or emulated to run, in those tests, the fragment and the viewmodel are both mocked and their lifecycles are emulated.
+When it comes to the fragment, it is first tested whether the activity finds any problem launching, then the display of information of characters tested and lastly another test is run to check whether the list is scrollable or not.
+On the other hand, tests on the viewmodel are performed in order to check the proper working of the retrieval of data and of all the 3 states, loading success and error. In any case, the expected response is mocked and the method with a call to the upper layers is stubbed so that whenever it is called and there is a response, it is bypassed and replaced with the previously mocked instance.
+
+### Domain
+
+Tests on domain are unit tests and the purpose of them is to make sure that the methods from the repository retrieve the proper data, the response is mocked and the method is stubbed, so that once the process has come to an end, if the result was successful the mocked response will be returned, otherwise, the test will fail.
+
+### Data
+
+Tests on domain are unit tests and the purpose of them is to make sure that both, the calls to the memory and the calls to the repository work properly, the way to perform those tests takes place in the same way as it does for domain, the response is mocked, and call to datasources is stubbed and the result is asserted for the test to succeed
+
+### Datasources
+
+Tests on this layer are unit tests as well, their purpose is to make sure that the ultimate layer of communication works well, in order to do so, the retrofit service is mocked as well as the memory, calls are performed after their methods have been stubbed, and the response is asserted with the mocked one that was created before, all parts of the process are tested to ensure the performance of the layer and the application as well.
+
+Being able to test each and any layer of the application separately, allows the developer to save a great amount of time whenever an error comes, by simply running the tests that were previously created, it becomes easy to spot the problem whereas debugging from scratch would have been an extra amount of time and resources, easily spared by the early implementation of tests throughout the application.
