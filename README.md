@@ -51,5 +51,20 @@ Regardless of the use case, the parameters sent to the data layer through the re
 
 ### Data
 
-This layer acts as an intermediate step between the domain and the datasources layer, the purpose of its existence is to deflect calls to either the memory of the application or the marvel API
+This layer acts as an intermediate step between the domain and the datasources layer, the purpose of its existence is to deflect calls to either the memory of the application or the marvel API.
+There at the implementation of the domain repository interface, the forceRemote parameter will be checked before performing a call through the data repository interface to its datasources layer implementation.
+If the forceRemote parameter is false, we will check the application's memory first and if we obtain no results, a call to the marvel API through the datasources layer will be performed, otherwise, the data from the memory will be given back all the way down to the app / presenter layer.
+If the forceRemote parameter is true, we will clear the data from the memory and perform a call to the marvel API straight away.
 
+### Datasources
+
+The datasources layer encompasses the means of communication with both, the memory of the application and the marvel API.
+The memory of the application is a sole class that keeps the instances alive of the previously retrieved data from the API and it is accessed to through the implementation of the data layer repository interface which implementations access the memory store and retrieve data to be returned to the app / presenter layer.
+The remote package of the datasources layer implements the data layer repository interface and performs calls to the retrofit service that contains the marvel API endpoints.
+
+## Dependency injection
+
+In order to have at our disposal all the required objects instanciated and available, it is necessary to inject them in Koin.
+Koin is the dependency injector that has been used in this test for this clean architecture to work.
+The location of the koin modules can be found within the app / presenter layer, at the common/di/AppModules.kt file.
+The setup of koin can be found at the OpenbankMobileTestApplication application class referenced from the AndroidManifest.xml
