@@ -12,22 +12,38 @@ further information of each of these characters by tapping on their element on t
 
 ## Architecture
 
-The application was developed following clean architecture practices in order to create a testable, scalable and easy to work on solution. It is divided in 4 diferent modules, these are:
+The application was developed following clean architecture practices in order to create a testable, scalable and easy to work on solution. It is divided in 4 diferent layers, these are:
 
 ### App / Presenter
 
-This layer encompasses the entire UI of the application and implements the Model-View-ViewModel design pattern. Once the application loads, the splash activity is displayed and navigates after a while to the main activity, once there, the recyclerview fragment is loaded within its container.
+This layer encompasses the entire UI of the application and implements the Model-View-ViewModel design pattern.
+
+Once the application loads, the splash activity is displayed for a while navigate to finally navigate towards the main activity, once there, the recyclerview fragment is loaded within its container.
+
+#### Navigation
 
 The navigation between activities takes place thanks to a custom component located in the common/navigation package that utilizes startActivity().
 On the other hand, the navigation between fragments takes place differently, using the NavComponent of the fragment itself to navigate towards the destination provided by the action observed.
 This is possible because of the observation of viewmodel live data from the main activity, once we tap on an element of the list, we make a call to the viewmodel to fire the action of navigation towards the detail fragment that in turn triggers the navigate method of the NavComponent located on the main activity.
 
-When it comes to the load of data into the UI, we make a call to the viewmodel when the fragment initializes, right after that, the viewmodel performs a call to the upper layers to retrieve data, since we are observing from the fragment the live data of the response, once it takes place, the UI is setup depending on the result.
-There are 3 states which a fragment can be in, loading, success and error.
+#### Load of data
 
-Once the application performs the call the state of the screen is set to loading.
+When it comes to the load of data into the UI, we make a call to the viewmodel when the fragment initializes, right after that, the viewmodel performs a call to the upper layers to retrieve data, since we are observing the live data of the response from the fragment itself, once we obtain a response, the UI is setup depending on the result.
+
+#### UI states
+
+There are 3 states which a fragment can be in, loading, success and error.
+Once the application performs the call, the state of the screen is set to loading.
 Right after getting the response the state of the screen will be set to either success or error.
 If the state is success, we fill the screen with the data obtained.
 If the state is error, we display an error screen with information of the related error and an error support code, as well as displaying a button to retry the formerly failed operation.
 
+#### Reactive programming
+
+In order to retrieve data from the upper layers and respond asynchronously, it is necessary to implement observers in the UI, the purpose behind this idea is to have a listener of the live data related to the use case at hand, that will be triggered once the live data has changed its state. This live data will contain the response of the upper layers and will be set as a result of the action performed by the use case located in the domain layer and called by the viewmodel.
+
+
+### Domain
+
+The domain layer contains the use cases
 
