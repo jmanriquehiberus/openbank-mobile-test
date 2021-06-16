@@ -45,5 +45,11 @@ In order to retrieve data from the upper layers and respond asynchronously, it i
 
 ### Domain
 
-The domain layer contains the use cases
+The domain layer contains the use cases of the application, there is a buildUseCaseObservable() on each of the use cases, this method is triggered when the execute() method of the use case's instance is called and takes place on a different thread. The instance that is going to be retrieved by both use cases in this application, is that of an observable, in both cases, a Single type object.
+The use case implements an interface that acts as a repository for all use cases in the layer, this interface will be implemented in the data layer.
+Regardless of the use case, the parameters sent to the data layer through the repository interface is passed from the viewmodel to the use case within a inner container class that will always have a forceRemote parameter, the importance of this will be described along with the data layer.
+
+### Data
+
+This layer acts as an intermediate step between the domain and the datasources layer, the purpose of its existence is to deflect calls to either the memory of the application or the marvel API
 
