@@ -12,8 +12,8 @@ further information of each of these characters by tapping on their element on t
 
 ## Functionality
 
-The app displays a list of marvel characters on its main screen, the user can either refresh the screen performing a pull to refresh gesture, or access the detail of selected character by tapping on it.
-In case an error occurres while retrieving data, an error screen with a retry button and the information related to the error will be displayed.
+The app displays a list of marvel characters on its main screen, the user can either refresh the screen performing a pull to refresh gesture, or access the detail of a character by tapping on it.
+In case an error occurs while retrieving data, an error screen with a retry button and the information related to the error will be displayed.
 Whenever a pull to refresh or a retry after an error is performed, a call to retrieve data is forced to the API, bypassing the memory of the application as it will described later on in further detail.
 
 The detail screen contains the name and description of the character, the number of series, stories and comics where the character appears, as well as links to the complete biography of the character and its appearances on series, stories and comics on the "Find out more" section. Those two types of links will be opened on a webview screen right after the user taps on its related UI components.
