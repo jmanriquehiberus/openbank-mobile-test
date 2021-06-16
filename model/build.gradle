@@ -1,0 +1,16 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+dependencies {
+    def modelDependencies = rootProject.ext.modelDependencies
+
+    implementation modelDependencies.kotlin
+}
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+}

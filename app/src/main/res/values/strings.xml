@@ -1,0 +1,54 @@
+<resources>
+    <!-- region General -->
+    <string name="app_name">Openbank Mobile Test</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="series_description_placeholder">series</string>
+    <string name="comics_description_placeholder">comics</string>
+    <string name="stories_description_placeholder">stories</string>
+    <!-- endregion -->
+
+    <!-- region Permissions -->
+    <string name="permissions_rationale_negative_button_text">Not now</string>
+    <string name="permissions_rationale_possitive_button_text">@string/ok</string>
+    <!-- endregion -->
+
+    <!-- region Error handling -->
+    <string name="error_dialog_title">Error</string>
+    <string name="error_default_message">An error\nhas occurred</string>
+    <string name="error_no_connection">There is no connection</string>
+    <string name="error_unauthorized">The passed API key is invalid</string>
+    <string name="error_forbidden">You have no access to that endpoint</string>
+    <string name="error_not_found">Not found</string>
+    <string name="error_method_not_allowed">HTTP verb method not allowed</string>
+    <string name="error_conflict">Either the apikey is lacking or the hash does not match or it is not properly formed</string>
+    <string name="error_connection_timeout">Time exceeded while trying to connect</string>
+    <string name="error_cannot_connect_to_server">It could not connect to the server</string>
+    <string name="error_support_code">Error support code</string>
+    <string name="error_retrieving_characters_list">An error has occurred retrieving the list of characters</string>
+    <string name="error_retrieving_character_detail">An error has occurred retrieving the character information</string>
+    <!-- endregion -->
+
+    <!-- region Splash screen -->
+    <string name="splash_screen_title">Openbank\nMobile Test</string>
+    <!-- endregion -->
+
+    <!-- region Characters fragment -->
+    <string name="characters_fragment_first_title">MARVEL</string>
+    <string name="characters_fragment_second_title">CHARACTERS</string>
+    <!-- endregion -->
+
+    <!-- region Characters fragment row -->
+    <string name="characters_fragment_row_name_placeholder">Lorem ipsum</string>
+    <string name="characters_fragment_row_amount_value_placeholder">0</string>
+    <!-- endregion -->
+
+    <!-- region Character detail fragment -->
+    <string name="character_detail_name_placeholder">CHARACTER</string>
+    <string name="character_detail_description_placeholder">A marvelous character\nfrom the marvel universe</string>
+    <string name="character_detail_find_out_more">Find out more</string>
+    <string name="character_detail_extensive_detail">Every character has a story</string>
+    <string name="character_detail_appearances">Appearances</string>
+    <!-- endregion -->
+</resources>

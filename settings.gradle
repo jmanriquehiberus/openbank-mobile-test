@@ -1,0 +1,6 @@
+include ':model'
+include ':datasources'
+include ':data'
+include ':domain'
+include ':app'
+rootProject.name = "Openbank Mobile Test"

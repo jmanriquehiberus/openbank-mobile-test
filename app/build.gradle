@@ -1,0 +1,185 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+// Used for parcelize on data classes
+androidExtensions {
+    experimental = true
+}
+
+android {
+
+    compileSdkVersion androidCompileSdkVersion
+
+    defaultConfig {
+        applicationId "com.javiermp.openbankmobiletest"
+        minSdkVersion 23
+        targetSdkVersion 30
+        vectorDrawables.useSupportLibrary = true
+
+        // Enabling multidex support.
+        multiDexEnabled true
+
+        buildConfigField "String", "API_KEY", API_KEY
+        buildConfigField "String", "PRIVATE_KEY", PRIVATE_KEY
+
+        testInstrumentationRunner "com.javiermp.openbankmobiletest.test.TestRunner"
+    }
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/license'
+        exclude 'META-INF/dependencies'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res'
+            ]
+        }
+    }
+
+    /* API 23 does not have org.apache.http*/
+    useLibrary 'org.apache.http.legacy'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation project(':model')
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':datasources')
+
+    def appDependencies = rootProject.ext.appDependencies
+
+    implementation appDependencies.kotlin
+    implementation appDependencies.volley
+    implementation appDependencies.material
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.lifecycleVMKtx
+    implementation appDependencies.legacySupport
+    implementation appDependencies.appCompat
+    implementation appDependencies.mediaRouter
+    implementation appDependencies.recyclerView
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.paytpv
+    implementation appDependencies.httpClient
+    implementation(appDependencies.httpMime) {
+        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+    implementation appDependencies.gson
+    implementation appDependencies.circleIndicator
+
+    //Picasso
+    implementation appDependencies.picasso
+
+    //OKHTTP & Retrofit
+    implementation appDependencies.okhttp
+    implementation appDependencies.loginInterceptor
+    implementation(appDependencies.retrofit) {
+        // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
+        exclude module: 'okhttp'
+    }
+    implementation appDependencies.glide
+    implementation appDependencies.converterGson
+
+    //LifeCycle
+    implementation appDependencies.lifecycleExtensions
+    kapt appDependencies.lifecycleCompiler
+    implementation appDependencies.fragNav
+    implementation appDependencies.navigationFragment
+    implementation appDependencies.navigationUi
+
+    //Toast
+    implementation appDependencies.toasty
+
+    //JWT
+    implementation appDependencies.jwtDecode
+
+    //Custom Dialogs
+    implementation appDependencies.dialogsCore
+    implementation appDependencies.dialogsInput
+    implementation appDependencies.dialogsDateTime
+
+    //KOIN DI
+    implementation appDependencies.koin
+    implementation appDependencies.koinScope
+    implementation appDependencies.koinViewmodel
+
+    // COROUTINES
+    implementation appDependencies.coroutines
+
+    //TIMBER
+    implementation appDependencies.timber
+
+    //UTILS
+    implementation appDependencies.ktxCore
+
+    // TEST
+    androidTestImplementation appTestDependencies.kotlinJUnit
+    androidTestImplementation appTestDependencies.lifecycleTest
+    androidTestImplementation appTestDependencies.koinTest
+    androidTestImplementation appTestDependencies.junit
+    androidTestImplementation appTestDependencies.mockitoKotlin
+    //androidTestImplementation appTestDependencies.mockitoInline
+    androidTestImplementation appTestDependencies.mockitoAndroid
+    androidTestImplementation appTestDependencies.androidJUnit
+    androidTestImplementation appTestDependencies.androidJUnitKtx
+    androidTestImplementation appTestDependencies.androidTestCore
+    androidTestImplementation appTestDependencies.androidTestCoreKtx
+    androidTestImplementation appTestDependencies.androidRunner
+    androidTestImplementation appTestDependencies.androidRules
+    androidTestImplementation appTestDependencies.espressoCore
+    androidTestImplementation appTestDependencies.espressoIntents
+    androidTestImplementation appTestDependencies.espressoContrib
+}
+
+apply plugin: 'androidx.navigation.safeargs'

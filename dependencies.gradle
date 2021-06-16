@@ -1,0 +1,187 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    // Android
+    androidMinSdkVersion = 23
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+
+    def kotlinVersion = rootProject.ext.kotlin_version
+    def navControllerVersion = rootProject.ext.navControllerVersion
+
+    // Libraries
+    annotationVersion = '1.1.0'
+    recyclerViewVersion = '1.0.0'
+    constraintLayoutVersion = '1.1.3'
+    koinVersion = '2.2.2'
+    rxJavaVersion = '3.0.10'
+    rxAndroidVersion = '3.0.0'
+    rxKotlinVersion = '3.0.1'
+    gsonVersion = '2.8.5'
+    okHttpVersion = '4.5.0'
+    retrofitVersion = '2.9.0'
+    glideVersion = '4.8.0'
+    lifecycle = '2.3.1'
+    lifecycleExtVersion = '2.2.0'
+    timberVersion = '4.7.1'
+    glideVersion = '4.9.0'
+    ktxCoreVersion = '1.3.2'
+    volleyVersion = '1.1.1'
+    materialVersion = '1.2.1'
+    legacySupportVersion = '1.0.0'
+    supportDesignVersion = '28.0.0'
+    appCompatVersion = '1.1.0-rc01'
+    mediaRouterVersion = '1.0.0'
+    recyclerViewVersion = '1.0.0'
+    constraintLayoutVersion = '1.1.3'
+    httpClientVersion = '4.3.5'
+    httpMimeVersion = '4.3.6'
+    gsonVersion = '2.8.5'
+    circleIndicatorVersion = '1.2.2@aar'
+    picassoVersion = '2.71828'
+    fragNavVersion = '3.2.0'
+    toastyVersion = '1.4.2'
+    jwtDecodeVersion = '1.3.0'
+    dialogsCoreVersion = '3.1.0'
+    dialogsInputVersion = '3.1.0'
+    dialogsDateTimeVersion = '3.1.0'
+    braintreeVersion = '3.4.2'
+    coroutinesVersion = '1.3.0'
+    paytpvVersion = '1.0'
+
+    // Testing
+    testCoreVersion = '1.3.0'
+    archVersion = '2.1.0'
+    androidJUnitVersion = '1.1.2'
+    robolectricVersion = '4.5.1'
+    jUnitVersion = '4.13.2'
+    assertJVersion = '3.19.0'
+    espressoVersion = '3.3.0'
+    mockitoKotlinVersion = '2.1.0'
+    mockitoInlineVersion = '3.8.0'
+    mockitoAndroidVersion = '3.8.0'
+    runnerVersion = '1.3.0'
+
+    appDependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            volley              : "com.android.volley:volley:${volleyVersion}",
+            material            : "com.google.android.material:material:${materialVersion}",
+            legacySupport       : "androidx.legacy:legacy-support-v4:${legacySupportVersion}",
+            appCompat           : "androidx.appcompat:appcompat:${appCompatVersion}",
+            mediaRouter         : "androidx.mediarouter:mediarouter:${mediaRouterVersion}",
+            recyclerView        : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
+            constraintLayout    : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            httpClient          : "org.apache.httpcomponents:httpclient-android:${httpClientVersion}",
+            httpMime            : "org.apache.httpcomponents:httpmime:${httpMimeVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            circleIndicator     : "me.relex:circleindicator:${circleIndicatorVersion}",
+            picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
+            okhttp              : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            loginInterceptor    : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            retrofit            : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            rxJava              : "io.reactivex.rxjava3:rxjava:${rxJavaVersion}",
+            rxAndroid           : "io.reactivex.rxjava3:rxandroid:${rxAndroidVersion}",
+            rxKotlin            : "io.reactivex.rxjava3:rxkotlin:${rxKotlinVersion}",
+            glide               : "com.github.bumptech.glide:glide:${glideVersion}",
+            converterGson       : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            lifecycleExtensions : "androidx.lifecycle:lifecycle-extensions:${lifecycleExtVersion}",
+            lifecycleCompiler   : "androidx.lifecycle:lifecycle-compiler:${lifecycle}",
+            lifecycleVMKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle}",
+            navigationFragment  : "androidx.navigation:navigation-fragment-ktx:${navControllerVersion}",
+            navigationUi        : "androidx.navigation:navigation-ui-ktx:${navControllerVersion}",
+            ktxCore             : "androidx.core:core-ktx:${ktxCoreVersion}",
+            navigationSafeArgs  : "androidx.navigation:navigation-safe-args-gradle-plugin:${navControllerVersion}",
+            fragNav             : "com.ncapdevi:frag-nav:${fragNavVersion}",
+            toasty              : "com.github.GrenderG:Toasty:${toastyVersion}",
+            jwtDecode           : "com.auth0.android:jwtdecode:${jwtDecodeVersion}",
+            dialogsCore         : "com.afollestad.material-dialogs:core:${dialogsCoreVersion}",
+            dialogsInput        : "com.afollestad.material-dialogs:input:${dialogsInputVersion}",
+            dialogsDateTime     : "com.afollestad.material-dialogs:datetime:${dialogsDateTimeVersion}",
+            koin                : "org.koin:koin-android:${koinVersion}",
+            koinScope           : "org.koin:koin-androidx-scope:${koinVersion}",
+            koinViewmodel       : "org.koin:koin-androidx-viewmodel:${koinVersion}",
+            coroutines          : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            paytpv              : "com.paytpv.androidsdk:paytpv-android-sdk:${paytpvVersion}",
+            timber              : "com.jakewharton.timber:timber:${timberVersion}"
+    ]
+
+    appTestDependencies = [
+            kotlinJUnit       : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            lifecycleTest     : "androidx.arch.core:core-testing:${archVersion}",
+            koinTest          : "org.koin:koin-test:${koinVersion}",
+            junit             : "junit:junit:${jUnitVersion}",
+            mockitoKotlin     : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
+            mockitoInline     : "org.mockito:mockito-inline:${mockitoInlineVersion}",
+            mockitoAndroid    : "org.mockito:mockito-android:${mockitoAndroidVersion}",
+            androidJUnit      : "androidx.test.ext:junit:${androidJUnitVersion}",
+            androidJUnitKtx   : "androidx.test.ext:junit-ktx:${androidJUnitVersion}",
+            androidTestCore   : "androidx.test:core:${testCoreVersion}",
+            androidTestCoreKtx: "androidx.test:core-ktx:${testCoreVersion}",
+            androidRunner     : "androidx.test:runner:${runnerVersion}",
+            androidRules      : "androidx.test:rules:${runnerVersion}",
+            espressoCore      : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents   : "androidx.test.espresso:espresso-intents:${espressoVersion}",
+            espressoContrib   : "androidx.test.espresso:espresso-contrib:${espressoVersion}"
+    ]
+
+    domainDependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava              : "io.reactivex.rxjava3:rxjava:${rxJavaVersion}",
+            rxAndroid           : "io.reactivex.rxjava3:rxandroid:${rxAndroidVersion}",
+            rxKotlin            : "io.reactivex.rxjava3:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    domainTestDependencies = [
+            junit               : "junit:junit:${jUnitVersion}",
+            kotlinJUnit         : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            mockitoKotlin       : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj             : "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    dataDependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava              : "io.reactivex.rxjava3:rxjava:${rxJavaVersion}",
+            rxAndroid           : "io.reactivex.rxjava3:rxandroid:${rxAndroidVersion}",
+            rxKotlin            : "io.reactivex.rxjava3:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit               : "junit:junit:${jUnitVersion}",
+            kotlinJUnit         : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            mockitoKotlin       : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj             : "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    datasourcesDependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            retrofit            : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapter     : "com.squareup.retrofit2:adapter-rxjava3:${retrofitVersion}",
+            okhttp              : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogger        : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            rxJava              : "io.reactivex.rxjava3:rxjava:${rxJavaVersion}",
+            rxKotlin            : "io.reactivex.rxjava3:rxkotlin:${rxKotlinVersion}",
+            timber              : "com.jakewharton.timber:timber:${timberVersion}"
+    ]
+
+    datasourcesTestDependencies = [
+            junit               : "junit:junit:${jUnitVersion}",
+            kotlinJUnit         : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            assertj             : "org.assertj:assertj-core:${assertJVersion}",
+            mockitoKotlin       : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
+            testCore            : "androidx.test:core:${testCoreVersion}",
+            androidRunner       : "androidx.test:runner:${runnerVersion}",
+            androidJUnit        : "androidx.test.ext:junit:${androidJUnitVersion}",
+            robolectric         : "org.robolectric:robolectric:${robolectricVersion}"
+    ]
+
+    modelDependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+    ]
+}

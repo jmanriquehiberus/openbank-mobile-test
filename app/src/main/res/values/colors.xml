@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- region Theme colors -->
+    <color name="colorPrimary">#1E4E6C</color>
+    <color name="colorPrimaryDark">#22486e</color>
+    <color name="colorAccent">#2C0F47</color>
+    <color name="colorPrimaryText">@android:color/black</color>
+    <color name="colorPrimaryTextDisabled">@android:color/darker_gray</color>
+    <!-- endregion -->
+
+    <!-- region Error colors -->
+    <color name="colorErrorDialogBackground">@android:color/holo_green_light</color>
+    <color name="colorError">@color/colorPrimary</color>
+    <!-- endregion -->
+</resources>

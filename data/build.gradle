@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+dependencies {
+    def dataDependencies = rootProject.ext.dataDependencies
+    def dataTestDependencies = rootProject.ext.dataTestDependencies
+
+    implementation project(':domain')
+    implementation project(':model')
+
+    implementation dataDependencies.kotlin
+    implementation dataDependencies.rxJava
+    implementation dataDependencies.rxAndroid
+    implementation dataDependencies.rxKotlin
+
+    testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.kotlinJUnit
+    testImplementation dataTestDependencies.mockitoKotlin
+    testImplementation dataTestDependencies.assertj
+}
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+
+    defaultConfig {
+        buildConfigField "String", "API_KEY", API_KEY
+        buildConfigField "String", "PRIVATE_KEY", PRIVATE_KEY
+    }
+}

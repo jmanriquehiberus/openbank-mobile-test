@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".characters.CharactersFragment"
+    android:background="@android:color/white">
+
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+            android:id="@+id/rl_characters_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/rl_characters_fragment_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/big_spacing"
+                android:layout_marginBottom="@dimen/big_spacing">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_spacing"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_characters_fragment_header_first_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/characters_fragment_first_title"
+                        android:textSize="@dimen/big_text_size"
+                        android:textColor="@color/colorAccent"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/micro_spacing"
+                        android:textAlignment="center"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/characters_fragment_second_title"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textColor="@color/colorAccent"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/srl_characters_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_characters_fragment_header">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_characters_fragment_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:requiresFadingEdge="vertical"
+                    tools:listitem="@layout/characters_fragment_row"/>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_pound"
+            android:layout_width="@dimen/big_loading_pound_size"
+            android:layout_height="@dimen/big_loading_pound_size"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_pound"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.9"
+            android:visibility="gone"/>
+
+        <com.javiermp.openbankmobiletest.common.widget.error.ErrorView
+            android:id="@+id/ev_characters_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"/>
+    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+</FrameLayout>
