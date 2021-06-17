@@ -1,7 +1,7 @@
 # Openbank mobile test
 
 This android application written in kotlin and based upon clean architecture, makes use of the marvel API to display a list of characters belonging to the marvel universe. In addition to that, it allows the user to see
-further information of each of these characters by tapping on their element on the list, as well as a detailed description of them available on the internet and linked to the character detail in a beautifully displayed manner.
+further information of each of these characters by tapping on their element on the list, as well as a detailed description of them available on the internet and linked to the character detail screen in a beautifully displayed manner.
 
 ## Screens
 
@@ -14,7 +14,7 @@ further information of each of these characters by tapping on their element on t
 
 The app displays a list of marvel characters on its main screen, the user can either refresh the screen performing a pull to refresh gesture, or access the detail of a character by tapping on it.
 In case an error occurs while retrieving data, an error screen with a retry button and the information related to the error will be displayed.
-Whenever a pull to refresh or a retry after an error is performed, a call to retrieve data is forced to the API, bypassing the memory of the application as it will described later on in further detail.
+Whenever a pull to refresh or a retry after an error is performed, a call to retrieve data is forced to the API, bypassing the memory of the application as it will be described later on in further detail.
 
 The detail screen contains the name and description of the character, the number of series, stories and comics where the character appears, as well as links to the complete biography of the character and its appearances on series, stories and comics on the "Find out more" section. Those two types of links will be opened on a webview screen right after the user taps on its related UI components.
 If there is no internet connection a snackbar will be displayed on screen notifying the user while preventing the webview from opening.
