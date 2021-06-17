@@ -57,12 +57,11 @@ If the state is error, we display an error screen with information of the relate
 
 In order to retrieve data from the upper layers and respond asynchronously, it is necessary to implement observers in the UI, the purpose behind this idea is to have a listener of the live data related to the use case at hand, that will be triggered once the live data has changed its state. This live data will contain the response of the upper layers and will be set as a result of the action performed by the use case located in the domain layer and called by the viewmodel.
 
-
 ### Domain
 
 The domain layer contains the use cases of the application, there is a buildUseCaseObservable() on each of the use cases, this method is triggered when the execute() method of the use case's instance is called and takes place on a different thread. The instance that is going to be retrieved by both use cases in this application, is that of an observable, in both cases, a Single type object.
 The use case implements an interface that acts as a repository for all use cases in the layer, this interface will be implemented in the data layer.
-Regardless of the use case, the parameters sent to the data layer through the repository interface is passed from the viewmodel to the use case within a inner container class that will always have a forceRemote parameter, the importance of this will be described along with the data layer.
+Regardless of the use case, the parameters sent to the data layer through the repository interface is passed from the viewmodel to the use case within an inner container class that will always have a forceRemote parameter, the importance of this parameter will be described along with the data layer.
 
 ### Data
 
@@ -74,7 +73,7 @@ If the forceRemote parameter is true, we will clear the data from the memory and
 ### Datasources
 
 The datasources layer encompasses the means of communication with both, the memory of the application and the marvel API.
-The memory of the application is a sole class that keeps the instances alive of the previously retrieved data from the API and it is accessed to through the implementation of the data layer repository interface which implementations access the memory store and retrieve data to be returned to the app / presenter layer.
+The memory of the application is a sole class that keeps the instances alive of the previously retrieved data from the API and it is accessed to through the implementation of the data layer repository interface whose implementations access the memory store and retrieve data to be returned to the app / presenter layer.
 The remote package of the datasources layer implements the data layer repository interface and performs calls to the retrofit service that contains the marvel API endpoints.
 Once a call has been performed, the service function that calls to the endpoint at hand returns a response object, there at the datasources implemented method from the data layer repository interface, we use a custom mapper to transform the response object into a list of models of type Character, this list will be wrapped into a single observable that will be finally returned all the way down to the app / presenter layer.
 
@@ -117,18 +116,18 @@ The code flow is tested straight from the fragment all the way up to the datasou
 
 Tests on the presenter layer are instrumented tests, as they require a device either physical or emulated to run, in those tests, the fragment and the viewmodel are both mocked and their lifecycles are emulated.
 When it comes to the fragment, it is first tested whether the activity finds any problem launching, then the display of information of characters tested and lastly another test is run to check whether the list is scrollable or not.
-On the other hand, tests on the viewmodel are performed in order to check the proper working of the retrieval of data and of all the 3 states, loading success and error. In any case, the expected response is mocked and the method with a call to the upper layers is stubbed so that whenever it is called and there is a response, it is bypassed and replaced with the previously mocked instance.
+On the other hand, tests on the viewmodel are performed in order to check the proper working of the retrieval of data and all the 3 states, loading, success and error. In any case, the expected response is mocked and the method with a call to the upper layers is stubbed so that whenever it is called and there is a response, it is bypassed and replaced with the previously mocked instance to finally assert the result with the expected response.
 
 ### Domain
 
-Tests on domain are unit tests and the purpose of them is to make sure that the methods from the repository retrieve the proper data, the response is mocked and the method is stubbed, so that once the process has come to an end, if the result was successful the mocked response will be returned, otherwise, the test will fail.
+Tests on domain are unit tests and the purpose of them is to make sure that the methods from the repository retrieve the proper data, the response is mocked and the method is stubbed, so that once the process has come to an end, if the result was successful the mocked response will be returned and if the expected response and the result matches the test will succeed, otherwise, the test will fail.
 
 ### Data
 
-Tests on domain are unit tests and the purpose of them is to make sure that both, the calls to the memory and the calls to the repository work properly, the way to perform those tests takes place in the same way as it does for domain, the response is mocked, and call to datasources is stubbed and the result is asserted for the test to succeed
+Tests on domain are unit tests and the purpose of them is to make sure that both, the calls to the memory and the calls to the repository work properly, the way to perform those tests takes place in the same way as it does for domain, the response is mocked, and call to datasources is stubbed and the result is asserted for the test to succeed.
 
 ### Datasources
 
-Tests on this layer are unit tests as well, their purpose is to make sure that the ultimate layer of communication works well, in order to do so, the retrofit service is mocked as well as the memory, calls are performed after their methods have been stubbed, and the response is asserted with the mocked one that was created before, all parts of the process are tested to ensure the performance of the layer and the application as well.
+Tests on this layer are unit tests as well, their purpose is to make sure that the ultimate layer of communication works well, in order to do so, the retrofit service is mocked as well as the memory, calls are performed after their methods have been stubbed, and the response is asserted with the mocked one which was created before, all parts of the process are tested to ensure the performance of the layer and the application as well.
 
-Being able to test each and any layer of the application separately, allows the developer to save a great amount of time whenever an error comes, by simply running the tests that were previously created, it becomes easy to spot the problem whereas debugging from scratch would have been an extra amount of time and resources, easily spared by the early implementation of tests throughout the application.
+Being able to test each and any layer of the application separately, allows the developer to save a great amount of time whenever an error comes, by simply running the previously created tests, it becomes easy to spot the problem whereas debugging from scratch would have posed an extra amount of time and resources, easily spared by an early implementation of tests throughout the application.
